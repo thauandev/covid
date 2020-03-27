@@ -33,8 +33,6 @@ request('https://www.worldometers.info/coronavirus/', function(err, res, body) {
     list.push(information);
 
     
-    console.log(list[0])
-    
 // Adicionando os dados no banco Mongo
     app.get('/', (req, res)=> {
     
