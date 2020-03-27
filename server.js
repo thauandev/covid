@@ -11,29 +11,37 @@ mongoose.connect(
    'mongodb://localhost:27017/covid', 
    { useNewUrlParser: true, useFindAndModify: true}
   );
+
 require('./src/models/Covid');  
 
 const Covid = mongoose.model('Covid');
 
+//Iniciando a requisição para efetuar o crawler
 request('https://www.worldometers.info/coronavirus/', function(err, res, body) {
   if (err) console.log('Erro: ' + err);
 
   // Variavel para pegar as informações da página
-  
   let $ = cheerio.load(body);
   
-  // Função para armzenar os dados desejados da página html
+  let list = [];
+  
+// Função para armzenar os dados desejados da página html
   $('.maincounter-number').each(function() {
     const information = $(this).find('span').text().trim();
     
-    let list = [information];
-   
-    console.log(list);
+
+    list.push(information);
+
     
+    console.log(list[0])
+    
+// Adicionando os dados no banco Mongo
     app.get('/', (req, res)=> {
     
       Covid.create({ 
-        cases: list, 
+        cases: list[0],
+        deaths: list[1],
+        recovered: list[2] 
         
       })
     
