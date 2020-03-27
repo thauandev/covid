@@ -43,7 +43,7 @@ request('https://www.worldometers.info/coronavirus/', function(err, res, body) {
         
       })
     
-      return res.send('testando api')
+      return res.send('Casos: ' + list[0] + ' Mortes: ' + list[1] + ' Recuperados: ' + list[2])
     });
     
 
