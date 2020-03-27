@@ -24,7 +24,7 @@ request('https://www.worldometers.info/coronavirus/', function(err, res, body) {
   
   // Função para armzenar os dados desejados da página html
   $('.maincounter-number').each(function() {
-    const information = $(this).find('span').first().text().trim();
+    const information = $(this).find('span').text().trim();
     
     let list = [information];
    
